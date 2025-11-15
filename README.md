@@ -88,25 +88,30 @@ ls -la models/model.onnx
 
 ### Quick Deploy to Jetson
 
-**1. Copy repo to Jetson:**
+**1. Clone repo on Jetson:**
 ```bash
-# From your PC, transfer entire project
-scp -r mldetection_jetson/ jetson@<jetson-ip>:/home/jetson/
+# SSH into Jetson
+ssh jetson@<jetson-ip>
+
+# Clone your repo (login with GitHub credentials if private)
+cd ~
+git clone https://github.com/yourusername/mldetection_jetson.git
+cd mldetection_jetson
 ```
 
-**2. On Jetson, install uv:**
+**2. Install uv:**
 ```bash
-ssh jetson@<jetson-ip>
 curl -LsSf https://astral.sh/uv/install.sh | sh
 export PATH="$HOME/.cargo/bin:$PATH"
 ```
 
 **3. Setup and run:**
 ```bash
-cd mldetection_jetson
 uv sync
 uv run app.py
 ```
+
+**Note:** If repo is private, use your GitHub username and personal access token when prompted.
 
 ### Performance Optimization (Jetson)
 
