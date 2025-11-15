@@ -9,8 +9,8 @@ def main():
     # model_path = r"E:\Documents\GitHub\poker-object-detection-working\poker_best.onnx"
     
     # Full path to screw model
-    model_path = r"E:\Documents\GitHub\poker-object-detection-working\yolov11n.onnx"
-    
+    # model_path = r"E:\Documents\GitHub\poker-object-detection-working\yolov11n.onnx"
+    model_path = r"E:\Documents\GitHub\mldetection_jetson\models\model.onnx"
     # Check if model exists
     if not os.path.exists(model_path):
         print(f"Error: Model not found at {model_path}")
