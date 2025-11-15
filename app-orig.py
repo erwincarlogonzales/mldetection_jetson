@@ -4,16 +4,13 @@ from ultralytics import YOLO
 import os
 
 def main():
-    # Relative path works on both PC and Jetson
-    model_path = os.path.join(os.path.dirname(__file__), "models", "model.onnx")
+    # Full path to screw model
+    model_path = r"E:\Documents\GitHub\mldetection_jetson\models\model.onnx"
     
     # Check if model exists
     if not os.path.exists(model_path):
         print(f"Error: Model not found at {model_path}")
         print(f"Current directory: {os.getcwd()}")
-        print(f"Files in current directory: {os.listdir('.')}")
-        if os.path.exists('models'):
-            print(f"Files in models/: {os.listdir('models')}")
         return
     
     # Load the YOLO model
@@ -50,21 +47,21 @@ def main():
         results = model(frame)[0]
         detections = sv.Detections.from_ultralytics(results)
         
-        # Count objects with good confidence in this frame
-        object_count = 0
+        # Count cards with good confidence in this frame
+        card_count = 0
         if len(detections) > 0 and detections.confidence is not None:
             # Only count detections with reasonable confidence
-            object_count = sum(1 for conf in detections.confidence if conf > 0.5)
+            card_count = sum(1 for conf in detections.confidence if conf > 0.5)
         
         # Draw bounding boxes and labels
         annotated_frame = frame.copy()
         annotated_frame = box_annotator.annotate(scene=annotated_frame, detections=detections)
         annotated_frame = label_annotator.annotate(scene=annotated_frame, detections=detections)
         
-        # Add object count to the frame
+        # Add card count to the frame
         cv2.putText(
             annotated_frame, 
-            f"Objects in view: {object_count}", 
+            f"Objects in view: {card_count}", 
             (10, 30), 
             cv2.FONT_HERSHEY_SIMPLEX, 
             0.7, 
