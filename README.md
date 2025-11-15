@@ -186,20 +186,20 @@ object_count = sum(1 for conf in detections.confidence if conf > 0.5)
 
 ---
 
-## Dissertation Defense Notes
+## Notes
 
-**If asked about edge deployment:**
+**Summary of edge deployment:**
 - Model runs on Jetson Nano 4GB (embedded hardware)
 - ~10-15 FPS real-time inference
 - 3.3 MB model size (efficient for edge)
 - No cloud/internet required
 
-**If asked about portability:**
+**Portability:**
 - Same code runs on PC/Mac for development
 - Deploys to Jetson with zero code changes
 - Uses relative paths (cross-platform compatible)
 
-**If asked for live demo:**
+**Live demo:**
 1. Ensure Jetson is powered on and connected
 2. SSH in: `ssh jetson@<jetson-ip>`
 3. Run: `cd mldetection_jetson && uv run app.py`
