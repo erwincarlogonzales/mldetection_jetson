@@ -11,10 +11,6 @@ cd mldetection_jetson
 uv sync
 uv run app.py
 ```
-
-**For Jetson Nano deployment (if asked during defense):**
-See [Jetson Deployment](#jetson-deployment) section below.
-
 ---
 
 ## Part 1: Development & Testing (PC/Mac)
