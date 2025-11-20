@@ -1,14 +1,3 @@
-**PERFECT!** Now I've got everything I need. Let me write you the ultimate README.
-
-```bash
-# I'll create this file
-nano README.md
-```
-
-Here's the complete guide:
-
----
-
 # ML Object Detection on Jetson Nano
 
 Real-time object detection system optimized for NVIDIA Jetson Nano 4GB with TensorRT acceleration. Achieves **~47ms inference time** (21 FPS) using GPU-accelerated TensorRT engine.
