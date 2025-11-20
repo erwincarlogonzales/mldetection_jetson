@@ -66,7 +66,7 @@ def main():
         # Add object count
         cv2.putText(
             annotated_frame, 
-            f"Objects in view: {object_count}", 
+            f"Objects in view: {object_count} | Inference: {inference_time:.1f}ms", 
             (10, 30), 
             cv2.FONT_HERSHEY_SIMPLEX, 
             0.7, 
