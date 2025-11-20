@@ -2,16 +2,16 @@ import cv2
 import supervision as sv
 from ultralytics import YOLO
 import os
+import time
 
 def main():
-    # Relative path works on both PC and Jetson
-    model_path = os.path.join(os.path.dirname(__file__), "models", "model.onnx")
+    # Relative path to model
+    model_path = os.path.join("models", "best_f16.engine")
     
     # Check if model exists
     if not os.path.exists(model_path):
         print(f"Error: Model not found at {model_path}")
         print(f"Current directory: {os.getcwd()}")
-        print(f"Files in current directory: {os.listdir('.')}")
         if os.path.exists('models'):
             print(f"Files in models/: {os.listdir('models')}")
         return
@@ -21,7 +21,7 @@ def main():
     model = YOLO(model_path)
     print("Model loaded successfully!")
     
-    # Open webcam (camera ID 0 is the default webcam)
+    # Open webcam
     camera_id = 0
     print(f"Opening camera {camera_id}...")
     cap = cv2.VideoCapture(camera_id)
@@ -32,7 +32,7 @@ def main():
     
     print("Camera opened successfully!")
     
-    # Create annotators for visualization
+    # Create annotators
     box_annotator = sv.BoxAnnotator()
     label_annotator = sv.LabelAnnotator()
     
@@ -40,31 +40,33 @@ def main():
     
     # Main detection loop
     while True:
-        # Capture frame from webcam
         ret, frame = cap.read()
         if not ret:
             print("Failed to grab frame")
             break
         
-        # Run detection on the frame
+        # Run detection with timing
+        start = time.time()
         results = model(frame)[0]
+        inference_time = (time.time() - start) * 1000
+        print(f"Inference: {inference_time:.1f}ms")
+        
         detections = sv.Detections.from_ultralytics(results)
         
-        # Count objects with good confidence in this frame
+        # Count objects with confidence > 0.5
         object_count = 0
         if len(detections) > 0 and detections.confidence is not None:
-            # Only count detections with reasonable confidence
             object_count = sum(1 for conf in detections.confidence if conf > 0.5)
         
-        # Draw bounding boxes and labels
+        # Annotate frame
         annotated_frame = frame.copy()
         annotated_frame = box_annotator.annotate(scene=annotated_frame, detections=detections)
         annotated_frame = label_annotator.annotate(scene=annotated_frame, detections=detections)
         
-        # Add object count to the frame
+        # Add object count
         cv2.putText(
             annotated_frame, 
-            f"Objects in view: {object_count}", 
+            f"Objects in view: {object_count} | Inference: {inference_time:.1f}ms", 
             (10, 30), 
             cv2.FONT_HERSHEY_SIMPLEX, 
             0.7, 
@@ -72,7 +74,7 @@ def main():
             2
         )
         
-        # Show the result
+        # Show result
         cv2.imshow("Object Detection", annotated_frame)
         
         # Press 'q' to exit
