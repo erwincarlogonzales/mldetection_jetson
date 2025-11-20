@@ -1,10 +1,11 @@
 [project]
 name = "mldetection-jetson"
 version = "0.1.0"
-description = "Add your description here"
+description = "Real-time object detection for Jetson Nano"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.6"
 dependencies = [
-    "supervision>=0.26.1",
-    "ultralytics>=8.3.228",
+    "supervision>=0.21.0",
+    "ultralytics>=8.0.0",
+    "opencv-python>=4.5.0",
 ]
