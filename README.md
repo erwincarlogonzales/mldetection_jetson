@@ -614,12 +614,6 @@ mldetection_jetson/
 
 ---
 
-## License
-
-[Your License Here]
-
----
-
 ## Citation
 
 If you use this project in your research, please cite:
