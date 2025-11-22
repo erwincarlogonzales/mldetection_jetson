@@ -102,13 +102,14 @@ sudo nvpmodel -q
 ### Step 2.4: Verify CUDA Installation
 
 ```bash
+# Add CUDA to PATH
+export PATH=/usr/local/cuda/bin:$PATH
+
 # Check CUDA version
 nvcc --version
 # Should show: Cuda compilation tools, release 10.2
 
-# Check GPU
-nvidia-smi
-# May not work on Jetson, try tegrastats instead:
+# Test tegrastats (the Jetson equivalent of nvidia-smi)
 tegrastats
 # Press Ctrl+C to exit
 ```
