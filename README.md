@@ -102,8 +102,14 @@ sudo nvpmodel -q
 ### Step 2.4: Verify CUDA Installation
 
 ```bash
-# Add CUDA to PATH
+# Check CUDA version (add to PATH first)
 export PATH=/usr/local/cuda/bin:$PATH
+nvcc --version
+# Should show: Cuda compilation tools, release 10.2
+
+# Make PATH permanent (optional)
+echo 'export PATH=/usr/local/cuda/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
 
 # Check CUDA version
 nvcc --version
