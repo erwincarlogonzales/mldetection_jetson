@@ -170,10 +170,6 @@ sudo docker info | grep -i runtime
 ```bash
 # Pull NVIDIA L4T base image (takes 5-10 minutes)
 sudo docker pull nvcr.io/nvidia/l4t-base:r32.7.1
-
-# Test GPU access
-sudo docker run --rm --runtime nvidia nvcr.io/nvidia/l4t-base:r32.7.1 nvidia-smi
-# Should show GPU info or tegra stats
 ```
 
 ---
@@ -305,7 +301,7 @@ ls -la models/
 pip3 install supervision opencv-python
 
 # Fix numpy version for TensorRT compatibility
-pip3 install numpy==1.19.4
+pip3 install numpy==1.23.5
 ```
 
 ### Step 6.3: Build TensorRT Engine
