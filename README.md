@@ -121,14 +121,17 @@ tegrastats
 ### Step 3.1: Install Docker
 
 ```bash
-# Install Docker
+# Install curl
+sudo apt-get install -y curl
+
+# Now continue with Docker install
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 
-# Add user to docker group (avoid sudo every time)
+# Add yourself to docker group
 sudo usermod -aG docker $USER
 
-# Verify installation
+# Check version
 docker --version
 # Should show: Docker version 20.x.x or higher
 ```
