@@ -453,7 +453,7 @@ AttributeError: module 'numpy' has no attribute 'bool'
 ```bash
 # Inside container
 pip3 uninstall numpy -y
-pip3 install numpy==1.19.4
+pip3 install numpy==1.23.5
 
 # Restart app
 python3 app.py
