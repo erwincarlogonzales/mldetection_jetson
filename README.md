@@ -141,16 +141,6 @@ sudo usermod -aG docker $USER
 docker --version
 # Should show: Docker version 20.x.x or higher
 ```
-
-**⚠️ Important:** Log out and log back in for group changes to take effect.
-
-```bash
-# Log out
-logout
-# Log back in, then verify
-docker run hello-world
-```
-
 ### Step 3.2: Install NVIDIA Container Runtime
 
 ```bash
